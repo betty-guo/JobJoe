@@ -5,18 +5,12 @@ package com.example.vmac.WatBot;
  */
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.TextView;
-
 
 import java.util.ArrayList;
 
-
-
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private int SELF = 100;
     private ArrayList<Message> messageArrayList;
 
@@ -46,7 +40,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         Message message = messageArrayList.get(position);
-        if (message.getId()!=null && message.getId().equals("1")) return SELF;
+        if (message.getId()!= null && message.getId().equals("1")) return SELF;
 
         return position;
     }

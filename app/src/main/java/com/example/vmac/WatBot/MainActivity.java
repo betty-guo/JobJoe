@@ -2,22 +2,15 @@ package com.example.vmac.WatBot;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.*;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.*;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.ibm.watson.developer_cloud.conversation.v1.Conversation;
-import com.ibm.watson.developer_cloud.conversation.v1.model.InputData;
-import com.ibm.watson.developer_cloud.conversation.v1.model.MessageOptions;
-import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
+import com.ibm.watson.developer_cloud.conversation.v1.model.*;
 
 import java.util.ArrayList;
 
@@ -85,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("100");
             this.initialRequest = false;
-
         }
 
         this.inputMessage.setText("");
@@ -100,15 +92,14 @@ public class MainActivity extends AppCompatActivity {
                     MessageOptions options = new MessageOptions.Builder(workspace_id).input(input).context(context).build();
                     MessageResponse response = service.message(options).execute();
 
-                    if(response.getContext() !=null) context = response.getContext();
+                    if(response.getContext() != null) context = response.getContext();
 
-                    final Message outMessage=new Message();
-                    if(response!=null) {
-                        if(response.getOutput()!=null && response.getOutput().containsKey("text"))
-                        {
+                    final Message outMessage = new Message();
+                    if(response != null) {
+                        if(response.getOutput()!=null && response.getOutput().containsKey("text")) {
 
                             ArrayList responseList = (ArrayList) response.getOutput().get("text");
-                            if(null !=responseList && responseList.size()>0){
+                            if(null !=responseList && responseList.size() > 0){
                                 outMessage.setMessage((String)responseList.get(0));
                                 outMessage.setId("2");
                             }
@@ -118,10 +109,8 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 mAdapter.notifyDataSetChanged();
-                                if (mAdapter.getItemCount() > 1) {
+                                if (mAdapter.getItemCount() > 1)
                                     recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount()-1);
-
-                                }
 
                             }
                         });
@@ -136,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Check Internet Connection
-     * @return
      */
     private boolean checkInternetConnection() {
         // get Connectivity Manager object to check connection
